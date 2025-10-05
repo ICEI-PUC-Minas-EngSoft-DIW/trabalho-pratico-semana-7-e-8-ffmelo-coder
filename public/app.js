@@ -1,0 +1,388 @@
+// Dados das cartas Magic
+const cartas = [
+  {
+    id: 1,
+    nome: "Sword of Feast and Famine",
+    preco: "BRL 87,14",
+    descricao: "Artifact — Equipment",
+    custoMana: "3",
+    cores: ["incolor"],
+    raridade: "Mythic Rare",
+    categoria: "Destaque",
+    imagem: "img/cartas/sword-of-feast-and-famine.jpg",
+    detalhes: {
+      poder: "-",
+      resistencia: "-",
+      texto:
+        "Equipped creature gets +2/+2 and has protection from black and from green.\n\nWhenever equipped creature deals combat damage to a player, that player discards a card and you untap all lands you control.\n\nEquip {2}",
+      artista: "Chris Rahn",
+      set: "Double Masters",
+      numero: "296/332",
+    },
+  },
+  {
+    id: 2,
+    nome: "Jace, Wielder of Mysteries",
+    preco: "BRL 18,43",
+    descricao: "Legendary Planeswalker — Jace",
+    custoMana: "1UUU",
+    cores: ["azul"],
+    raridade: "Rare",
+    categoria: "Destaque",
+    imagem: "img/cartas/war-54-jace-wielder-of-mysteries.jpg",
+    detalhes: {
+      poder: "-",
+      resistencia: "-",
+      lealdade: "4",
+      texto:
+        "If you would draw a card while your library has no cards in it, you win the game instead.\n\n+1: Target player mills two cards. Draw a card.\n\n−8: Draw seven cards. Then if your library has no cards in it, you win the game.",
+      artista: "Anna Steinbauer",
+      set: "War of the Spark",
+      numero: "54/264",
+    },
+  },
+  {
+    id: 3,
+    nome: "Blasphemous Act",
+    preco: "BRL 11,16",
+    descricao: "Sorcery",
+    custoMana: "8R",
+    cores: ["vermelho"],
+    raridade: "Rare",
+    categoria: "Destaque",
+    imagem: "img/cartas/eoc-86-blasphemous-act.jpg",
+    detalhes: {
+      poder: "-",
+      resistencia: "-",
+      texto:
+        "This spell costs {1} less to cast for each creature on the battlefield. \n\nBlasphemous Act deals 13 damage to each creature.",
+      artista: "Daarken",
+      set: "Edge of Eternities: Commander",
+      numero: "0086",
+    },
+  },
+  {
+    id: 4,
+    nome: "Counterspell",
+    preco: "BRL 4,81",
+    descricao: "Instant",
+    custoMana: "UU",
+    cores: ["azul"],
+    raridade: "Uncommon",
+    categoria: "Destaque",
+    imagem: "img/cartas/dsc-114-counterspell.jpg",
+    detalhes: {
+      poder: "-",
+      resistencia: "-",
+      texto: "Counter target spell.",
+      artista: "Zack Stella",
+      set: "Duskmourn: House of Horror Commander",
+      numero: "0114",
+    },
+  },
+  {
+    id: 5,
+    nome: "Icetill Explorer",
+    preco: "BRL 68,69",
+    descricao: "Creature — Insect Scout",
+    custoMana: "2G",
+    cores: ["verde"],
+    raridade: "Rare",
+    categoria: "Nova",
+    imagem: "img/cartas/eoe-192-icetill-explorer.jpg",
+    detalhes: {
+      poder: "2",
+      resistencia: "4",
+      texto: `You may play an additional land on each of your turns.\n\nYou may play lands from your graveyard.\n\nLandfall — Whenever a land you control enters, mill a card.`,
+      artista: "Warren Mahy",
+      set: "Edge of Eternities",
+      numero: "0192",
+    },
+  },
+  {
+    id: 6,
+    nome: "The Dominion Bracelet",
+    preco: "BRL 17,99",
+    descricao: "Legendary Artifact - Equipment",
+    custoMana: "2",
+    cores: ["incolor"],
+    raridade: "Mythic Rare",
+    categoria: "Nova",
+    imagem: "img/cartas/eoe-239-the-dominion-bracelet.jpg",
+    detalhes: {
+      poder: "-",
+      resistencia: "-",
+      texto: `Equipped creature gets +1/+1 and has "{15}, Exile The Dominion Bracelet: You control target opponent during their next turn. This ability costs {X} less to activate, where X is this creature’s power. Activate only as a sorcery." \n\nEquip {1}`,
+      artista: "Nathaniel Himawan",
+      set: "Edge of Eternities",
+      numero: "0239",
+    },
+  },
+  {
+    id: 7,
+    nome: "Kaito, Bane of Nightmares",
+    preco: "BRL 179,49",
+    descricao: "Legendary Planeswalker — Kaito",
+    custoMana: "2UB",
+    cores: ["azul", "preto"],
+    raridade: "Mythic Rare",
+    categoria: "Nova",
+    imagem: "img/cartas/dsk-220-kaito-bane-of-nightmares.jpg",
+    detalhes: {
+      poder: "-",
+      resistencia: "-",
+      lealdade: "4",
+      texto: `Ninjutsu {1}{U}{B}\n\nDuring your turn, as long as Kaito has one or more loyalty counters on him, he’s a 3/4 Ninja creature and has hexproof.\n\n+1: You get an emblem with “Ninjas you control get +1/+1.”\n\n0: Surveil 2. Then draw a card for each opponent who lost life this turn.\n\n−2: Tap target creature. Put two stun counters on it.`,
+      artista: "Joshua Raphael",
+      set: "Duskmourn: House of Horror",
+      numero: "220",
+    },
+  },
+  {
+    id: 8,
+    nome: "Fomori Vault",
+    preco: "BRL 49,90",
+    descricao: "Land",
+    custoMana: "",
+    cores: ["incolor"],
+    raridade: "Mythic Rare",
+    categoria: "Nova",
+    imagem: "img/cartas/big-29-fomori-vault.jpg",
+    detalhes: {
+      poder: "-",
+      resistencia: "-",
+      texto: `{T}: Add {C}.\n\n{3}, {T}, Discard a card: Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in a random order.`,
+      artista: "Jonas de Ro",
+      set: "The Big Score",
+      numero: "0029",
+    },
+  },
+];
+
+// Função para gerar cards na página principal
+function gerarCards() {
+  const cartasDestaque = cartas.filter(
+    (carta) => carta.categoria === "Destaque"
+  );
+  const cartasNovas = cartas.filter((carta) => carta.categoria === "Nova");
+
+  // Gerar cards de destaque
+  const listaDestaque = document.querySelector(".destaques .lista-cartas");
+  if (listaDestaque) {
+    const setaEsquerda = listaDestaque.querySelector(".seta:first-child");
+    const setaDireita = listaDestaque.querySelector(".seta:last-child");
+
+    // Limpar cards existentes (manter apenas as setas)
+    listaDestaque.innerHTML = "";
+    listaDestaque.appendChild(setaEsquerda.cloneNode(true));
+
+    cartasDestaque.forEach((carta) => {
+      const cardElement = criarCard(carta);
+      listaDestaque.appendChild(cardElement);
+    });
+
+    listaDestaque.appendChild(setaDireita.cloneNode(true));
+  }
+
+  // Gerar cards novas
+  const listaNovas = document.querySelector(".novas .lista-cartas");
+  if (listaNovas) {
+    const setaEsquerda = listaNovas.querySelector(".seta:first-child");
+    const setaDireita = listaNovas.querySelector(".seta:last-child");
+
+    // Limpar cards existentes (manter apenas as setas)
+    listaNovas.innerHTML = "";
+    listaNovas.appendChild(setaEsquerda.cloneNode(true));
+
+    cartasNovas.forEach((carta) => {
+      const cardElement = criarCard(carta);
+      listaNovas.appendChild(cardElement);
+    });
+
+    listaNovas.appendChild(setaDireita.cloneNode(true));
+  }
+}
+
+// Função para criar um card individual
+function criarCard(carta) {
+  const article = document.createElement("article");
+  article.className = "carta flex-shrink-0";
+  article.style.cursor = "pointer";
+
+  article.innerHTML = `
+    <img class="img-fluid" src="${carta.imagem}" alt="${carta.nome}" />
+    <p>${carta.nome}<br>${carta.preco}</p>
+  `;
+
+  // Adicionar evento de clique para navegar para a página de detalhes
+  article.addEventListener("click", () => {
+    window.location.href = `detalhes.html?id=${carta.id}`;
+  });
+
+  return article;
+}
+
+// Função para carregar detalhes da carta na página de detalhes
+function carregarDetalhes() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const cartaId = parseInt(urlParams.get("id"));
+
+  if (!cartaId) {
+    document.body.innerHTML = "<h1>Carta não encontrada</h1>";
+    return;
+  }
+
+  const carta = cartas.find((c) => c.id === cartaId);
+
+  if (!carta) {
+    document.body.innerHTML = "<h1>Carta não encontrada</h1>";
+    return;
+  }
+
+  // Preencher informações da carta na página de detalhes
+  preencherDetalhes(carta);
+}
+
+// Função para preencher os detalhes da carta
+function preencherDetalhes(carta) {
+  document.title = `${carta.nome} - Coleção Magic`;
+
+  // Atualizar elementos da página
+  const nomeElement = document.getElementById("carta-nome");
+  const imagemElement = document.getElementById("carta-imagem");
+  const precoElement = document.getElementById("carta-preco");
+  const descricaoElement = document.getElementById("carta-descricao");
+  const custoManaElement = document.getElementById("carta-custo-mana");
+  const raridadeElement = document.getElementById("carta-raridade");
+  const poderResistenciaElement = document.getElementById(
+    "carta-poder-resistencia"
+  );
+  const textoElement = document.getElementById("carta-texto");
+  const artistaElement = document.getElementById("carta-artista");
+  const setElement = document.getElementById("carta-set");
+  const numeroElement = document.getElementById("carta-numero");
+  const lealdadeElement = document.getElementById("carta-lealdade");
+
+  if (nomeElement) nomeElement.textContent = carta.nome;
+  if (imagemElement) {
+    imagemElement.src = carta.imagem;
+    imagemElement.alt = carta.nome;
+  }
+  if (precoElement) precoElement.textContent = carta.preco;
+  if (descricaoElement) descricaoElement.textContent = carta.descricao;
+  if (custoManaElement) custoManaElement.textContent = carta.custoMana || "—";
+  if (raridadeElement) raridadeElement.textContent = carta.raridade;
+
+  // Poder e Resistência ou Lealdade
+  if (carta.detalhes.lealdade) {
+    if (poderResistenciaElement) poderResistenciaElement.textContent = "—";
+    if (lealdadeElement) lealdadeElement.textContent = carta.detalhes.lealdade;
+  } else {
+    if (poderResistenciaElement) {
+      poderResistenciaElement.textContent = `${carta.detalhes.poder}/${carta.detalhes.resistencia}`;
+    }
+    if (lealdadeElement) lealdadeElement.textContent = "—";
+  }
+
+  if (textoElement) textoElement.textContent = carta.detalhes.texto;
+  if (artistaElement) artistaElement.textContent = carta.detalhes.artista;
+  if (setElement) setElement.textContent = carta.detalhes.set;
+  if (numeroElement) numeroElement.textContent = carta.detalhes.numero;
+
+  // Gerar símbolos de mana
+  gerarSimbolosMana(carta.cores);
+}
+
+// Função para gerar símbolos de mana
+function gerarSimbolosMana(cores) {
+  const coresContainer = document.getElementById("carta-cores");
+  if (!coresContainer) return;
+
+  coresContainer.innerHTML = "";
+
+  const simbolosMana = {
+    branco: "img/mana/W.svg",
+    azul: "img/mana/U.svg",
+    preto: "img/mana/B.svg",
+    vermelho: "img/mana/R.svg",
+    verde: "img/mana/G.svg",
+    incolor: "img/mana/C.svg",
+  };
+
+  cores.forEach((cor) => {
+    if (simbolosMana[cor]) {
+      const img = document.createElement("img");
+      img.src = simbolosMana[cor];
+      img.alt = cor;
+      img.className = "simbolo-mana";
+      img.style.width = "20px";
+      img.style.height = "20px";
+      img.style.marginRight = "5px";
+      coresContainer.appendChild(img);
+    }
+  });
+}
+
+// Função para funcionalidade dos botões de mana (pesquisa)
+function configurarBotoesMana() {
+  const manaButtons = document.querySelectorAll(".mana");
+
+  manaButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.toggle("checked");
+    });
+  });
+}
+
+// Função para configurar navegação entre cartas
+function configurarNavegacaoCartas() {
+  const btnAnterior = document.getElementById("carta-anterior");
+  const btnProxima = document.getElementById("carta-proxima");
+
+  if (!btnAnterior || !btnProxima) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const cartaAtual = parseInt(urlParams.get("id"));
+
+  // Encontrar índices das cartas
+  const cartaAtualIndex = cartas.findIndex((c) => c.id === cartaAtual);
+  const cartaAnteriorIndex = cartaAtualIndex - 1;
+  const cartaProximaIndex = cartaAtualIndex + 1;
+
+  // Configurar botão anterior
+  if (cartaAnteriorIndex >= 0) {
+    const cartaAnterior = cartas[cartaAnteriorIndex];
+    btnAnterior.addEventListener("click", () => {
+      window.location.href = `detalhes.html?id=${cartaAnterior.id}`;
+    });
+    btnAnterior.title = `← ${cartaAnterior.nome}`;
+  } else {
+    btnAnterior.disabled = true;
+    btnAnterior.title = "Primeira carta";
+  }
+
+  // Configurar botão próxima
+  if (cartaProximaIndex < cartas.length) {
+    const cartaProxima = cartas[cartaProximaIndex];
+    btnProxima.addEventListener("click", () => {
+      window.location.href = `detalhes.html?id=${cartaProxima.id}`;
+    });
+    btnProxima.title = `${cartaProxima.nome} →`;
+  } else {
+    btnProxima.disabled = true;
+    btnProxima.title = "Última carta";
+  }
+}
+
+// Inicialização baseada na página atual
+document.addEventListener("DOMContentLoaded", () => {
+  // Verificar se estamos na página principal ou de detalhes
+  if (window.location.pathname.includes("detalhes.html")) {
+    carregarDetalhes();
+    configurarNavegacaoCartas();
+  } else {
+    // Página principal
+    gerarCards();
+    configurarBotoesMana();
+  }
+});
