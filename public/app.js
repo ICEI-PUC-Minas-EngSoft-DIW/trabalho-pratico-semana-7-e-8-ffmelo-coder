@@ -1,4 +1,8 @@
-// Dados das cartas Magic
+// ============================================
+// ESTRUTURA JSON DOS DADOS DAS CARTAS MAGIC
+// ============================================
+
+// Dados das cartas Magic - Base de dados completa
 const cartas = [
   {
     id: 1,
@@ -159,6 +163,10 @@ const cartas = [
   },
 ];
 
+// ============================================
+// FUNÇÕES DE GERAÇÃO DINÂMICA DE CONTEÚDO
+// ============================================
+
 // Função para gerar cards na página principal
 function gerarCards() {
   const cartasDestaque = cartas.filter(
@@ -169,37 +177,41 @@ function gerarCards() {
   // Gerar cards de destaque
   const listaDestaque = document.querySelector(".destaques .lista-cartas");
   if (listaDestaque) {
-    const setaEsquerda = listaDestaque.querySelector(".seta:first-child");
-    const setaDireita = listaDestaque.querySelector(".seta:last-child");
-
-    // Limpar cards existentes (manter apenas as setas)
+    // Preservar as setas e limpar apenas os cards
+    const setas = listaDestaque.querySelectorAll(".seta");
     listaDestaque.innerHTML = "";
-    listaDestaque.appendChild(setaEsquerda.cloneNode(true));
 
+    // Adicionar seta esquerda
+    if (setas[0]) listaDestaque.appendChild(setas[0]);
+
+    // Adicionar cards de destaque
     cartasDestaque.forEach((carta) => {
       const cardElement = criarCard(carta);
       listaDestaque.appendChild(cardElement);
     });
 
-    listaDestaque.appendChild(setaDireita.cloneNode(true));
+    // Adicionar seta direita
+    if (setas[1]) listaDestaque.appendChild(setas[1]);
   }
 
   // Gerar cards novas
   const listaNovas = document.querySelector(".novas .lista-cartas");
   if (listaNovas) {
-    const setaEsquerda = listaNovas.querySelector(".seta:first-child");
-    const setaDireita = listaNovas.querySelector(".seta:last-child");
-
-    // Limpar cards existentes (manter apenas as setas)
+    // Preservar as setas e limpar apenas os cards
+    const setas = listaNovas.querySelectorAll(".seta");
     listaNovas.innerHTML = "";
-    listaNovas.appendChild(setaEsquerda.cloneNode(true));
 
+    // Adicionar seta esquerda
+    if (setas[0]) listaNovas.appendChild(setas[0]);
+
+    // Adicionar cards novos
     cartasNovas.forEach((carta) => {
       const cardElement = criarCard(carta);
       listaNovas.appendChild(cardElement);
     });
 
-    listaNovas.appendChild(setaDireita.cloneNode(true));
+    // Adicionar seta direita
+    if (setas[1]) listaNovas.appendChild(setas[1]);
   }
 }
 
@@ -221,6 +233,10 @@ function criarCard(carta) {
 
   return article;
 }
+
+// ============================================
+// FUNÇÕES DA PÁGINA DE DETALHES
+// ============================================
 
 // Função para carregar detalhes da carta na página de detalhes
 function carregarDetalhes() {
@@ -323,6 +339,10 @@ function gerarSimbolosMana(cores) {
   });
 }
 
+// ============================================
+// FUNÇÕES DE NAVEGAÇÃO E INTERATIVIDADE
+// ============================================
+
 // Função para funcionalidade dos botões de mana (pesquisa)
 function configurarBotoesMana() {
   const manaButtons = document.querySelectorAll(".mana");
@@ -344,35 +364,50 @@ function configurarNavegacaoCartas() {
   const urlParams = new URLSearchParams(window.location.search);
   const cartaAtual = parseInt(urlParams.get("id"));
 
-  // Encontrar índices das cartas
-  const cartaAtualIndex = cartas.findIndex((c) => c.id === cartaAtual);
-  const cartaAnteriorIndex = cartaAtualIndex - 1;
-  const cartaProximaIndex = cartaAtualIndex + 1;
+  // Encontrar a carta atual
+  const carta = cartas.find((c) => c.id === cartaAtual);
+  if (!carta) return;
+
+  // Filtrar cartas pela mesma categoria
+  const cartasDaCategoria = cartas.filter(
+    (c) => c.categoria === carta.categoria
+  );
+
+  // Encontrar índice da carta atual dentro da categoria
+  const indexAtualNaCategoria = cartasDaCategoria.findIndex(
+    (c) => c.id === cartaAtual
+  );
 
   // Configurar botão anterior
-  if (cartaAnteriorIndex >= 0) {
-    const cartaAnterior = cartas[cartaAnteriorIndex];
+  if (indexAtualNaCategoria > 0) {
+    const cartaAnterior = cartasDaCategoria[indexAtualNaCategoria - 1];
     btnAnterior.addEventListener("click", () => {
       window.location.href = `detalhes.html?id=${cartaAnterior.id}`;
     });
+    btnAnterior.disabled = false;
     btnAnterior.title = `← ${cartaAnterior.nome}`;
   } else {
     btnAnterior.disabled = true;
-    btnAnterior.title = "Primeira carta";
+    btnAnterior.title = `Primeira carta da categoria "${carta.categoria}"`;
   }
 
   // Configurar botão próxima
-  if (cartaProximaIndex < cartas.length) {
-    const cartaProxima = cartas[cartaProximaIndex];
+  if (indexAtualNaCategoria < cartasDaCategoria.length - 1) {
+    const cartaProxima = cartasDaCategoria[indexAtualNaCategoria + 1];
     btnProxima.addEventListener("click", () => {
       window.location.href = `detalhes.html?id=${cartaProxima.id}`;
     });
+    btnProxima.disabled = false;
     btnProxima.title = `${cartaProxima.nome} →`;
   } else {
     btnProxima.disabled = true;
-    btnProxima.title = "Última carta";
+    btnProxima.title = `Última carta da categoria "${carta.categoria}"`;
   }
 }
+
+// ============================================
+// INICIALIZAÇÃO DA APLICAÇÃO
+// ============================================
 
 // Inicialização baseada na página atual
 document.addEventListener("DOMContentLoaded", () => {
