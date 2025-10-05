@@ -228,7 +228,37 @@ function criarCard(carta) {
 
   // Adicionar evento de clique para navegar para a página de detalhes
   article.addEventListener("click", () => {
-    window.location.href = `detalhes.html?id=${carta.id}`;
+    // Adicionar feedback visual antes da navegação
+    article.style.transform = "scale(0.95)";
+    article.style.opacity = "0.8";
+
+    // Navegar após uma pequena animação
+    setTimeout(() => {
+      window.location.href = `detalhes.html?id=${carta.id}`;
+    }, 150);
+  });
+
+  // Adicionar efeito hover
+  article.addEventListener("mouseenter", () => {
+    article.style.transform = "scale(1.05)";
+    article.style.transition = "transform 0.2s ease";
+  });
+
+  article.addEventListener("mouseleave", () => {
+    article.style.transform = "scale(1)";
+  });
+
+  // Adicionar atributo para acessibilidade
+  article.setAttribute("tabindex", "0");
+  article.setAttribute("role", "button");
+  article.setAttribute("aria-label", `Ver detalhes da carta ${carta.nome}`);
+
+  // Permitir navegação via teclado
+  article.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      article.click();
+    }
   });
 
   return article;
@@ -243,20 +273,40 @@ function carregarDetalhes() {
   const urlParams = new URLSearchParams(window.location.search);
   const cartaId = parseInt(urlParams.get("id"));
 
-  if (!cartaId) {
-    document.body.innerHTML = "<h1>Carta não encontrada</h1>";
+  // Verificar se o ID é válido
+  if (!cartaId || isNaN(cartaId)) {
+    mostrarErroDetalhes("ID da carta inválido ou não fornecido");
     return;
   }
 
+  // Buscar a carta pelo ID
   const carta = cartas.find((c) => c.id === cartaId);
 
   if (!carta) {
-    document.body.innerHTML = "<h1>Carta não encontrada</h1>";
+    mostrarErroDetalhes(`Carta com ID ${cartaId} não encontrada`);
     return;
   }
 
   // Preencher informações da carta na página de detalhes
   preencherDetalhes(carta);
+}
+
+// Função para mostrar erro na página de detalhes
+function mostrarErroDetalhes(mensagem) {
+  const main = document.querySelector("main");
+  if (main) {
+    main.innerHTML = `
+      <div class="container text-center mt-5">
+        <div class="alert alert-danger" role="alert">
+          <h2>❌ Erro</h2>
+          <p class="mb-3">${mensagem}</p>
+          <a href="index.html" class="btn btn-warning btn-lg">
+            🏠 Voltar para Home
+          </a>
+        </div>
+      </div>
+    `;
+  }
 }
 
 // Função para preencher os detalhes da carta
